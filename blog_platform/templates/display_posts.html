@@ -1,0 +1,23 @@
+{% extends "base_extended.html" %}
+{% load static %}
+{% block styles %}
+    {{block.super}}
+    <link rel="stylesheet" href="{% static 'css/posts.css' %}">
+{% endblock styles %}
+{% block content %}
+{{ block.super }}
+{% if posts %}
+    <ul class="postsList">
+    {% for post in posts %}
+    <li>
+        <div class="postTitle">{{ post.title }}</div>
+        <div class="postAuthor">{{ post.creation_time|date:"d/m/y H:i" }} by {{ post.author }}</div>
+        <div class="postText">{{ post.text }}</div>
+    </li>
+    <hr class="delimiter">
+    {% endfor %}    
+    </ul>
+    {% else %}
+        <div class="noPosts">No posts have been added yet, <a href="{% url 'blog_platform.views.write_post' %}">be the first!</a></div>
+    {% endif %}    
+{% endblock content %}

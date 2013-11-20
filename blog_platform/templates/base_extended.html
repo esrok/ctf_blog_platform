@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}
+    {{ block.super }} | {{ title }}
+{% endblock title %}
+{% block content %}
+    {{ block.super }}
+    {% block account %}
+    <div class="header">
+        <h1 class="greeting">
+        {% if user.is_authenticated %}
+            Hello, {{ user.username }}!
+        {% else %}
+            Hello, stranger!
+        {% endif %}
+        </h1>
+    </div>
+    <div class="clearfix"></div>
+    {% endblock account %}
+    <nav>
+    {% block navigation %}        
+        <ul>
+            <li><a href="{% url 'blog_platform.views.display_user_posts' %}">My posts</a></li>
+            <li><a href="{% url 'blog_platform.views.display_latest_posts' count=10 %}">Latest posts</a></li>
+            <li><a href="{% url 'blog_platform.views.write_post' %}">Write post</a></li>
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'blog_platform.views.logout' %}">Logout</a></li>
+            {% else %}
+            <li><a href="{% url 'blog_platform.views.login' %}">Login</a></li>
+            <li><a href="{% url 'blog_platform.views.register' %}">Register</a></li>
+            {% endif %}
+        </ul>
+    {% endblock navigation %}
+    </nav>
+{% endblock content %}

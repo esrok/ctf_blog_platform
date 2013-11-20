@@ -1,0 +1,54 @@
+/*
+ *    Awesome blog platform specially designed for ctf@seclab.msu.
+ *    Visit us at: https://github.com/esrok/ctf_blog_platform/
+ *    Copyright (C) 2013 korse
+ *    This program is free software: you can redistribute it and/or modify
+ *    it under the terms of the GNU General Public License as published by
+ *    the Free Software Foundation, either version 3 of the License, or
+ *    (at your option) any later version.
+ *    This program is distributed in the hope that it will be useful,
+ *    but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *    GNU General Public License for more details.
+ *
+ *    You should have received a copy of the GNU General Public License
+ *    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/    
+
+ul.postsList {
+    list-style-type: none;
+    list-style-position: inline;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+div.noPosts {
+    padding-left: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+div.postTitle {
+    font-size: 20px;
+    font-style: italic;
+    line-height: 22px;
+    color: #999999;
+    padding-left: 15px;
+    margin-bottom: 5px;
+}
+
+div.postAuthor {
+    color: #ABABAB;
+    font-size: 12px;
+}
+
+div.postText {
+    font-size: 14px;
+    line-height: 16px;
+    text-align: justify;
+}
+
+hr.delimiter {
+    border-top: 1px solid #ABABAB;
+}

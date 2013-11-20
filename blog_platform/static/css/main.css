@@ -1,0 +1,117 @@
+/*
+ *    Awesome blog platform specially designed for ctf@seclab.msu.
+ *    Visit us at: https://github.com/esrok/ctf_blog_platform/
+ *    Copyright (C) 2013 korse
+ *    This program is free software: you can redistribute it and/or modify
+ *    it under the terms of the GNU General Public License as published by
+ *    the Free Software Foundation, either version 3 of the License, or
+ *    (at your option) any later version.
+ *    This program is distributed in the hope that it will be useful,
+ *    but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *    GNU General Public License for more details.
+ *
+ *    You should have received a copy of the GNU General Public License
+ *    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/    
+
+body {
+    background: #DEDEDE;
+}
+
+.content {
+    background: #FFFFFF;
+    border: 1px solid #BBBBBB;
+    border-radius: 5px;
+    margin: auto;
+    margin-top: 20px;
+    width: 70%;
+}
+
+.header {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    height: 35px;
+    float: right;
+}
+
+
+.header * {
+    display: inline;
+}
+
+h1.greeting {
+    font-size: 16px;
+    line-height: 20px;
+    font-style: italic;
+    padding-right: 10px;
+}
+
+.clearfix {
+    clear: both;
+}
+
+nav {
+    margin-bottom: 10px;
+}
+
+nav > ul {
+    list-style-type: none;
+    padding-left: 0;
+    border-top: 1px dotted #BBBBBB;
+    border-bottom: 1px dotted #BBBBBB;
+}
+
+nav > ul > li {
+    display: inline;
+}
+
+nav > ul > li > a {
+    display: inline-block;
+    height: 40px;
+
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    text-align: center;
+    border-right: 1px dotted #BBBBBB;
+}
+
+form {
+ padding-left: 10px;
+ padding-top: 10px;   
+}
+
+form label {
+    font-size: 14px;
+    font-style: none;
+    color: #444444;
+}
+
+form input, textarea {
+    border: 1px solid #CCCCCC;
+    border-radius: 4px;
+}
+
+ul.errorList {
+    font-style: italic;
+}
+
+ul.errorList > li {
+    list-style-type: none;
+}
+
+form > div.formTitle {
+    font-size: 18px;
+    font-style: bold;
+    color: #444444;
+    padding-bottom: 5px;
+}
+
+span.helptext {
+    display:block;
+    font-size: 12px;
+    color: #888888;
+}
