@@ -26,7 +26,7 @@ def display_latest_posts(request, count=10):
 def display_post(request, author, slug):
     post = BlogPost.objects.get(
         author__username=author,
-        # slug=slug,
+        slug=slug,
         private=False,
     )
     return render(request, 'display_post.html', {
