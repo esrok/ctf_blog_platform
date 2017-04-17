@@ -24,11 +24,19 @@ def display_latest_posts(request, count=10):
 
 
 def display_post(request, author, slug):
-    post = BlogPost.objects.get(
-        author__username=author,
-        slug=slug,
-        private=False,
-    )
+    if request.user.is_authenticated() and request.user.username == author:
+        # own post
+        post = BlogPost.objects.get(
+            author=request.user,
+            slug=slug,
+        )
+    else:
+        # not own post, so should filter upon private
+        post = BlogPost.objects.get(
+            author__username=author,
+            slug=slug,
+            private=False,
+        )
     return render(request, 'display_post.html', {
         'post': post,
         'title': 'My posts',
@@ -81,7 +89,12 @@ def write_post(request):
             post = form.save(commit=False)
             post.author = request.user
             post.save()
-            return HttpResponseRedirect(reverse('blog_platform.views.display_user_posts'))
+            return HttpResponseRedirect(reverse(
+                'blog_platform.views.display_post', kwargs={
+                    'author': request.user,
+                    'slug': post.slug,
+                }
+            ))
     return render(request, 'write_post.html', {
         'form': form,
         'title': 'Write post',
