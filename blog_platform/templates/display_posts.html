@@ -10,7 +10,7 @@
     <ul class="postsList">
     {% for post in posts %}
     <li>
-        <div class="blogTitle"><a href="{% url 'blog_platform.views.display_post' author=post.author.username slug=post.slug %}">{{ post.title }}</a></div>
+        <div class="postTitle"><a href="{% url 'blog_platform.views.display_post' author=post.author.username slug=post.slug %}">{{ post.title }}</a></div>
         <div class="postAuthor">{{ post.creation_time|date:"d/m/y H:i" }} by {{ post.author }}</div>
         <div class="postText">{{ post.text }}</div>
     </li>
