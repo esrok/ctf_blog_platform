@@ -29,6 +29,10 @@ div.noPosts {
     font-size: 14px;
 }
 
+div.post {
+    margin: 10px;
+}
+
 div.postTitle {
     font-size: 20px;
     font-style: italic;

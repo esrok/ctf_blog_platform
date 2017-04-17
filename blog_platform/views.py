@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.core.urlresolvers import reverse
 from django.db.models import Q
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render
 
 
@@ -17,20 +17,47 @@ def display_latest_posts(request, count=10):
     else:
         posts = BlogPost.objects.filter(private=False)[:count]
         
-    return render(request, 'display_posts.html', {'posts':posts,
-                                                  'title':'Latest posts'})
+    return render(request, 'display_posts.html', {
+        'posts': posts,
+        'title': 'Latest posts'
+    })
+
+
+def display_post(request, author, slug):
+    try:
+        if request.user.is_authenticated() and request.user.username == author:
+            # own post
+            post = BlogPost.objects.get(
+                author=request.user,
+                slug=slug,
+            )
+        else:
+            # not own post, so should filter upon private
+            post = BlogPost.objects.get(
+                author__username=author,
+                slug=slug,
+                private=False,
+            )
+    except BlogPost.DoesNotExist:
+        raise Http404("Post does not exist")
+    return render(request, 'display_post.html', {
+        'post': post,
+        'title': 'My posts',
+    })
+
 
 @login_required
 def display_user_posts(request):
     posts = BlogPost.objects.filter(author=request.user)
-    return render(request, 'display_posts.html', {'posts':posts,
-                                                  'title':'My posts'})
+    return render(request, 'display_posts.html', {
+        'posts': posts,
+        'title': 'My posts',
+    })
 
 
 def register(request):
     form = UserCreationForm(request.POST or None)
     if request.method == 'POST':
-        # form = UserCreationForm(request.POST)
         if form.is_valid():
             new_user = form.save()
             return HttpResponseRedirect("/")
@@ -51,9 +78,11 @@ def login(request):
         'form': auth_form,
     })
 
+
 def logout(request):
     auth.logout(request)
     return HttpResponseRedirect(reverse('blog_platform.views.login'))
+
 
 @login_required
 def write_post(request):
@@ -63,7 +92,12 @@ def write_post(request):
             post = form.save(commit=False)
             post.author = request.user
             post.save()
-            return HttpResponseRedirect(reverse('blog_platform.views.display_user_posts'))
+            return HttpResponseRedirect(reverse(
+                'blog_platform.views.display_post', kwargs={
+                    'author': request.user,
+                    'slug': post.slug,
+                }
+            ))
     return render(request, 'write_post.html', {
         'form': form,
         'title': 'Write post',
