@@ -8,6 +8,7 @@
     {{ block.super }}
     <div class="post">
         <div class="postTitle"><a href="{% url 'blog_platform.views.display_post' post.author post.slug %}">{{ post.title }}</a></div>
+        <div class="postAuthor">{{ post.creation_time|date:"d/m/y H:i" }} by {{ post.author }}</div>
         <div class="postText">{{ post.text }}</div>
     </div>
 {% endblock content %}
