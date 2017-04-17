@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.core.urlresolvers import reverse
 from django.db.models import Q
-from django.http import HttpResponseRedirect
+from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render
 
 
@@ -24,19 +24,22 @@ def display_latest_posts(request, count=10):
 
 
 def display_post(request, author, slug):
-    if request.user.is_authenticated() and request.user.username == author:
-        # own post
-        post = BlogPost.objects.get(
-            author=request.user,
-            slug=slug,
-        )
-    else:
-        # not own post, so should filter upon private
-        post = BlogPost.objects.get(
-            author__username=author,
-            slug=slug,
-            private=False,
-        )
+    try:
+        if request.user.is_authenticated() and request.user.username == author:
+            # own post
+            post = BlogPost.objects.get(
+                author=request.user,
+                slug=slug,
+            )
+        else:
+            # not own post, so should filter upon private
+            post = BlogPost.objects.get(
+                author__username=author,
+                slug=slug,
+                private=False,
+            )
+    except BlogPost.DoesNotExist:
+        raise Http404("Post does not exist")
     return render(request, 'display_post.html', {
         'post': post,
         'title': 'My posts',
