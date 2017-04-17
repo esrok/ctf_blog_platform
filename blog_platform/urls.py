@@ -10,5 +10,5 @@ urlpatterns = patterns('',
     url(r'^accounts/register/$', 'blog_platform.views.register'),
     url(r'^accounts/login/$', 'blog_platform.views.login'),
     url(r'^accounts/logout/$', 'blog_platform.views.logout'),
-    url(r'^(?P<author>\w+)/(?P<slug>\w+)/$', 'blog_platform.views.display_post'),
+    url(r'^(?P<author>\w+)/(?P<slug>[a-zA-Z0-9_-]+)/$', 'blog_platform.views.display_post'),
 )
