@@ -23,6 +23,18 @@ def display_latest_posts(request, count=10):
     })
 
 
+def display_post(request, author, slug):
+    post = BlogPost.objects.get(
+        author__username=author,
+        # slug=slug,
+        private=False,
+    )
+    return render(request, 'display_post.html', {
+        'post': post,
+        'title': 'My posts',
+    })
+
+
 @login_required
 def display_user_posts(request):
     posts = BlogPost.objects.filter(author=request.user)
