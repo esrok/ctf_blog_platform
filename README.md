@@ -1,2 +1,2 @@
-# H1 CTF blog platform
+## CTF blog platform
 This is a simple web-based task for git, signed cookies and old versions of django.
